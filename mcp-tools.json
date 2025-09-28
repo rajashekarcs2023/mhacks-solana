@@ -1,0 +1,163 @@
+{
+  "name": "Trader's Co-Pilot",
+  "description": "AI-native Solana MCP server for traders",
+  "version": "0.1.0",
+  "server": {
+    "url": "http://localhost:8787",
+    "type": "http"
+  },
+  "tools": [
+    {
+      "name": "get_balance",
+      "description": "Check SOL balance for any Solana address on Devnet",
+      "endpoint": "POST /tools/get_balance",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "Solana address in base58 format",
+            "minLength": 32,
+            "maxLength": 44
+          }
+        },
+        "required": ["address"]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "address": {"type": "string"},
+          "lamports": {"type": "number"},
+          "sol": {"type": "number"}
+        }
+      }
+    },
+    {
+      "name": "explain_tx",
+      "description": "Analyze and explain Solana transactions in plain English with risk flags",
+      "endpoint": "POST /tools/explain_tx",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "signature": {
+            "type": "string",
+            "description": "Transaction signature to analyze",
+            "minLength": 64
+          }
+        },
+        "required": ["signature"]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "signature": {"type": "string"},
+          "summary": {"type": "string"},
+          "movements": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "account": {"type": "string"},
+                "deltaSol": {"type": "number"}
+              }
+            }
+          },
+          "accountsTouched": {"type": "number"},
+          "riskFlags": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      }
+    },
+    {
+      "name": "market_buy_sim",
+      "description": "Preview cryptocurrency trades safely with slippage protection (Devnet only)",
+      "endpoint": "POST /tools/market_buy_sim",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "mint": {
+            "type": "string",
+            "default": "SOL",
+            "description": "Token to buy (SOL, USDC, BTC)"
+          },
+          "usdAmount": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 10000,
+            "description": "USD amount to spend"
+          },
+          "slippageBps": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 150,
+            "default": 50,
+            "description": "Maximum slippage in basis points (1-150)"
+          },
+          "network": {
+            "type": "string",
+            "default": "devnet",
+            "description": "Network to use (devnet only for safety)"
+          }
+        },
+        "required": ["usdAmount"]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "mint": {"type": "string"},
+          "usdAmount": {"type": "number"},
+          "slippageBps": {"type": "number"},
+          "preview": {
+            "type": "object",
+            "properties": {
+              "plainEnglish": {"type": "string"},
+              "expectedFill": {"type": "string"},
+              "feeEstimate": {"type": "number"}
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "airdrop_and_tip",
+      "description": "Send a small SOL tip on Devnet for demonstration purposes",
+      "endpoint": "POST /tools/airdrop_and_tip",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "to": {
+            "type": "string",
+            "description": "Recipient Solana address",
+            "minLength": 32,
+            "maxLength": 44
+          },
+          "sol": {
+            "type": "number",
+            "minimum": 0.001,
+            "maximum": 1.0,
+            "default": 0.01,
+            "description": "Amount of SOL to send (0.001-1.0)"
+          }
+        },
+        "required": ["to"]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "signature": {"type": "string"},
+          "preview": {"type": "string"},
+          "from": {"type": "string"}
+        }
+      }
+    }
+  ],
+  "safety": {
+    "network": "devnet",
+    "maxSlippageBps": 150,
+    "maxTipAmount": 1.0,
+    "noPrivateKeys": true,
+    "mainnetProtection": true
+  }
+}

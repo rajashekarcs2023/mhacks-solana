@@ -1,0 +1,48 @@
+{
+  "name": "traders-copilot",
+  "version": "0.1.0",
+  "description": "AI-native Solana MCP server for traders - making blockchain interactions safe and accessible",
+  "type": "module",
+  "main": "dist/server/index.js",
+  "scripts": {
+    "dev": "npx tsx server/index.ts",
+    "mcp": "npx tsx server/mcp-server.ts",
+    "start": "node dist/server/index.js",
+    "build": "tsc -p .",
+    "test": "npm run build && npm start",
+    "demo": "./demo.sh",
+    "test-mcp": "node test-mcp-client.js",
+    "test-anthropic": "node test-anthropic-mcp.js",
+    "test-creative": "node test-creative-features.js",
+    "test-ultimate": "node test-ultimate-features.js"
+  },
+  "keywords": [
+    "solana",
+    "mcp",
+    "trading",
+    "blockchain",
+    "ai",
+    "web3"
+  ],
+  "author": "Hackathon Team",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.64.0",
+    "@modelcontextprotocol/sdk": "^1.18.2",
+    "@pythnetwork/client": "^2.22.1",
+    "@solana/spl-token": "^0.4.14",
+    "@solana/web3.js": "^1.93.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
