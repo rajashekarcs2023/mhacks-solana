@@ -103,20 +103,7 @@ npm run test-ultimate
 
 **Conservative Projection: $50M ARR within 24 months**
 
----
 
-## 🏆 **SLIDE 6: WHY WE WIN (30 seconds)**
-
-### **Competition Comparison:**
-
-| Feature | Competitors | Trader's Co-Pilot |
-|---------|-------------|-------------------|
-| **Tools** | 2-3 basic | 14 professional |
-| **AI Integration** | None | Throughout |
-| **MEV Protection** | None | Advanced |
-| **Real Data** | Mock/Static | Live Pyth feeds |
-| **Win Rate** | Unknown | 73.2% proven |
-| **Testing** | Broken demos | Comprehensive |
 
 ### **Unique Value Props:**
 - ✅ **Only** MCP server with MEV protection
