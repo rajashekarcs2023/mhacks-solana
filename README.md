@@ -10,7 +10,7 @@
 
 ## 🎯 What is Trader's Co-Pilot?
 
-Trader's Co-Pilot is the **most advanced Solana MCP server ever built**, featuring **14 professional-grade tools** that enable AI agents to:
+Trader's Co-Pilot is an advanced Solana MCP server, featuring **14 professional-grade tools** that enable AI agents to:
 
 ### 🧠 **AI-Powered Intelligence**
 - **Generate trading signals with 73.2% proven win rate** from 247 backtested signals
